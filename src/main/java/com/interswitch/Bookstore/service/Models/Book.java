@@ -1,6 +1,6 @@
 package com.interswitch.Bookstore.service.Models;
 
-import com.interswitch.Bookstore.service.Dtos.Requests.BookRequest;
+import com.interswitch.Bookstore.service.Dtos.Requests.CartRequest;
 import com.interswitch.Bookstore.service.Enums.BookGenre;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -43,14 +43,5 @@ public class Book {
       this.yearOfPublication = yearOfPublication;
       this.createdAt = LocalDateTime.now();
    }
-
-   public Book(BookRequest request) {
-      this.title  = request.getTitle();
-      this.genre  = request.getGenre();
-      this.isbn   = request.getIsbn();
-      this.author = request.getAuthor();
-      this.yearOfPublication = request.getYearOfPublication();
-   }
-
 
 }

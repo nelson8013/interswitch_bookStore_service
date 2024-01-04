@@ -1,6 +1,7 @@
 package com.interswitch.Bookstore.service.Services;
 
 import com.interswitch.Bookstore.service.Enums.BookGenre;
+import com.interswitch.Bookstore.service.Exceptions.UserExceptions.UserNotFoundException;
 import com.interswitch.Bookstore.service.Interfaces.UserServiceInterface;
 import com.interswitch.Bookstore.service.Models.Book;
 import com.interswitch.Bookstore.service.Models.User;
@@ -11,6 +12,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import java.util.Arrays;
+import java.util.List;
 
 @Service
 public class UserService implements UserServiceInterface {
@@ -40,4 +42,16 @@ public class UserService implements UserServiceInterface {
       }
 
    }
+
+   @Override
+   public List<User> getUsers() {
+      return userRepository.findAll();
+   }
+
+   @Override
+   public User getUser(Long id) {
+      return userRepository.findById(id).orElseThrow( ()-> new UserNotFoundException("This user doesn't exist"));
+   }
+
+
 }

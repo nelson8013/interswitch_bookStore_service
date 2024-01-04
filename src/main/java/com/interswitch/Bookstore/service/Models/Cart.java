@@ -17,7 +17,15 @@ public class Cart {
    @GeneratedValue(strategy = GenerationType.IDENTITY)
    private Long id;
 
-   @OneToMany
+   @OneToOne(cascade = CascadeType.ALL)
+   @JoinColumn(name = "user_id")
+   private User user;
+
+   @ManyToMany
+   @JoinTable(
+           name = "cart_books",
+           joinColumns = @JoinColumn(name = "cart_id"),
+           inverseJoinColumns = @JoinColumn(name = "book_id"))
    private List<Book> books;
 
    private Double totalAmount;
@@ -27,4 +35,18 @@ public class Cart {
 
    @UpdateTimestamp
    private LocalDateTime updatedAt;
+
+
+   public Cart() {}
+
+   public Cart(User user, List<Book> books, Double totalAmount) {
+      this.user        = user;
+      this.books       = books;
+      this.totalAmount = totalAmount;
+   }
+
+   public Cart(User user, List<Book> books) {
+      this.user  = user;
+      this.books = books;
+   }
 }
