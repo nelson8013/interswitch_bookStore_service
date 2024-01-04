@@ -10,11 +10,9 @@ public interface BookServiceInterface {
    void initializeBooks();
    List<Book> books();
    Book book(Long id);
-   Book getBookByTitle(String title);
-   Book getBookByAuthor(String author);
-   Book getBookByPublicationYear(String year);
+   List<Book> getBookByTitle(String title);
+   List<Book> getBookByAuthor(String author);
+   List<Book> getBookByPublicationYear(String year);
    List<Book> getBookByGenre(BookGenre genre);
-   List<Book> searchBooks(String searchTerm);
 
-   List<Book> searchBooksTwo(String searchTerm);
 }

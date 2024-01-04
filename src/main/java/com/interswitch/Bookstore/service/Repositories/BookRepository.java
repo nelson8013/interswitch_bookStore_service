@@ -10,9 +10,9 @@ import java.util.List;
 import java.util.Optional;
 
 public interface BookRepository extends JpaRepository<Book, Long> {
-   Optional<Book> findByTitle(String title);
-   Optional<Book> findByAuthor(String author);
-   Optional<Book> findByPublicationYear(String year);
+   List<Book> findByTitle(String title);
+   List<Book> findByAuthor(String author);
+   List<Book> findByYearOfPublication(String yearOfPublication);
    List<Book> findByGenre(BookGenre genre);
 
    /*
@@ -25,9 +25,4 @@ public interface BookRepository extends JpaRepository<Book, Long> {
     *
     * */
 
-
-   List<Book> findByTitleContainingIgnoreCaseOrAuthorContainingIgnoreCaseOrYearOfPublicationContainingIgnoreCaseOrGenreContainingIgnoreCase(String searchTerm);
-
-   @Query("SELECT b FROM Book b WHERE LOWER(b.title) LIKE LOWER(CONCAT('%', :searchTerm, '%')) OR LOWER(b.author) LIKE LOWER(CONCAT('%', :searchTerm, '%')) OR LOWER(b.yearOfPublication) LIKE LOWER(CONCAT('%', :searchTerm, '%')) OR LOWER(b.genre) LIKE LOWER(CONCAT('%', :searchTerm, '%'))")
-   List<Book> searchBooks(@Param("searchTerm") String searchTerm);
 }

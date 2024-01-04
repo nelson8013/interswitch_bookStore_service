@@ -33,15 +33,15 @@ public class BookService implements BookServiceInterface {
    public void initializeBooks() {
 
       if (bookRepository.count() == 0) {
-         Book chinaTown           = new Book("china Town", BookGenre.THRILLER, "7893434-347-003", "Jackie Chan", "1998");
-         Book theGreatGatsby      = new Book("The Great Gatsby", BookGenre.FICTION, "978-0-7432-7356-5", "F. Scott Fitzgerald", "1925");
-         Book intoTheWild         = new Book("Into the Wild", BookGenre.FICTION, "978-0-385-48680-2", "Jon Krakauer", "1996");
+         Book chinaTown           = new Book("china Town",         BookGenre.THRILLER, "789-0-4341-1347-0", "Jackie Chan", "1998");
+         Book theGreatGatsby      = new Book("The Great Gatsby",   BookGenre.FICTION, "978-0-7432-7356-5", "F. Scott Fitzgerald", "1925");
+         Book intoTheWild         = new Book("Into the Wild",      BookGenre.FICTION, "978-0-385-48680-2", "Jon Krakauer", "1996");
          Book orientExpressMurder = new Book("Murder on the Orient Express", BookGenre.MYSTERY, "978-0-06-2693662", "Agatha Christie", "1934");
-         Book theHobbit           = new Book("The Hobbit", BookGenre.FICTION, "978-0-618-63420-0", "J.R.R. Tolkien", "1937");
-         Book theRaven            = new Book("The Raven", BookGenre.POETRY, "978-1-84749-310-3", "Edgar Allan Poe", "1845");
-         Book it                  = new Book("It", BookGenre.HORROR, "978-0451169518", "Stephen King", "1986");
-         Book prideAndPrejudice   = new Book("Pride and Prejudice", BookGenre.FICTION, "978-1-85326-000-9", "Jane Austen", "1813");
-         Book catch22             = new Book("Catch-22", BookGenre.SATIRE, "978-0-684-85358-7", "Joseph Heller", "1961");
+         Book theHobbit           = new Book("The Hobbit",         BookGenre.FICTION, "978-0-618-63420-0", "J.R.R. Tolkien", "1937");
+         Book theRaven            = new Book("The Raven",          BookGenre.POETRY, "978-1-84749-310-3", "Edgar Allan Poe", "1845");
+         Book it                  = new Book("It",                 BookGenre.HORROR, "978-0451169518", "Stephen King", "1986");
+         Book prideAndPrejudice   = new Book("Pride and Prejudice",BookGenre.FICTION, "978-1-85326-000-9", "Jane Austen", "1813");
+         Book catch22             = new Book("Catch-22",           BookGenre.SATIRE, "978-0-684-85358-7", "Joseph Heller", "1961");
          Book tattooGirl          = new Book("The Girl with the Dragon Tattoo", BookGenre.THRILLER, "978-0-307-45440-6", "Stieg Larsson", "2005");
 
          bookRepository.saveAll(Arrays.asList(chinaTown, theGreatGatsby, intoTheWild, orientExpressMurder,theHobbit, theRaven, it, prideAndPrejudice, catch22, tattooGirl));
@@ -77,11 +77,16 @@ public class BookService implements BookServiceInterface {
    }
 
    @Override
-   public Book getBookByTitle(String title) {
+   public List<Book> getBookByTitle(String title) {
       try {
 
-         return bookRepository.findByTitle(title)
-                 .orElseThrow(() -> new BookNotFoundException("Book with title: " + title + "' does not exist"));
+         List<Book> books = bookRepository.findByTitle(title);
+
+         if (books.isEmpty()) {
+            throw new BookNotFoundException("Book with title: " + title + "' does not exist");
+         }
+
+         return books;
 
       }catch (BookNotFoundException exception) {
          LOGGER.error("Book not found: {}", exception.getMessage());
@@ -90,12 +95,15 @@ public class BookService implements BookServiceInterface {
    }
 
    @Override
-   public Book getBookByAuthor(String author) {
+   public List<Book> getBookByAuthor(String author) {
       try {
+         List<Book> books = bookRepository.findByAuthor(author);
 
-         return bookRepository.findByAuthor(author)
-                 .orElseThrow(() -> new BookNotFoundException("Book with author: " + author + " does not exist"));
+         if (books.isEmpty()) {
+            throw new BookNotFoundException("Book with author: " + author + " does not exist");
+         }
 
+         return books;
       }catch (BookNotFoundException exception) {
          LOGGER.error("Book not found: {}", exception.getMessage());
          throw exception;
@@ -103,12 +111,15 @@ public class BookService implements BookServiceInterface {
    }
 
    @Override
-   public Book getBookByPublicationYear(String year) {
+   public List<Book> getBookByPublicationYear(String year) {
       try {
+         List<Book> books = bookRepository.findByYearOfPublication(year);
 
-         return bookRepository.findByPublicationYear(year)
-                 .orElseThrow(() -> new BookNotFoundException("Book with year: " + year + " does not exist"));
+         if (books.isEmpty()) {
+            throw new BookNotFoundException("No books found for the year: " + year);
+         }
 
+         return books;
       }catch (BookNotFoundException exception) {
          LOGGER.error("Book not found: {}", exception.getMessage());
          throw exception;
@@ -128,26 +139,5 @@ public class BookService implements BookServiceInterface {
       }
    }
 
-   public List<Book> searchBooks(String searchTerm) {
-      try {
-
-         return bookRepository.searchBooks(searchTerm);
-
-      } catch (Exception error) {
-         LOGGER.error("An error occurred while trying to search books by this search term: " + searchTerm, error);
-         return Collections.emptyList();
-      }
-   }
-
-   public List<Book> searchBooksTwo(String searchTerm) {
-      try {
-
-         return bookRepository.findByTitleContainingIgnoreCaseOrAuthorContainingIgnoreCaseOrYearOfPublicationContainingIgnoreCaseOrGenreContainingIgnoreCase(searchTerm);
-
-      } catch (Exception error) {
-         LOGGER.error("An error occurred while trying to search books by this search term: " + searchTerm, error);
-         return Collections.emptyList();
-      }
-   }
 
 }

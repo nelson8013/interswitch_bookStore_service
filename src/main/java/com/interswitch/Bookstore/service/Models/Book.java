@@ -50,7 +50,6 @@ public class Book {
       this.isbn   = request.getIsbn();
       this.author = request.getAuthor();
       this.yearOfPublication = request.getYearOfPublication();
-      this.createdAt = request.getCreatedAt();
    }
 
 
