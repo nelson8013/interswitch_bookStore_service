@@ -7,6 +7,7 @@ import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -17,15 +18,13 @@ public class Cart {
    @GeneratedValue(strategy = GenerationType.IDENTITY)
    private Long id;
 
-   @OneToOne(cascade = CascadeType.ALL)
+//   @OneToOne(cascade = CascadeType.ALL)
+   @OneToOne
    @JoinColumn(name = "user_id")
    private User user;
 
    @ManyToMany
-   @JoinTable(
-           name = "cart_books",
-           joinColumns = @JoinColumn(name = "cart_id"),
-           inverseJoinColumns = @JoinColumn(name = "book_id"))
+   @JoinTable(name = "cart_books", joinColumns = @JoinColumn(name = "cart_id"),inverseJoinColumns = @JoinColumn(name = "book_id"))
    private List<Book> books;
 
    private Double totalAmount;
@@ -41,12 +40,12 @@ public class Cart {
 
    public Cart(User user, List<Book> books, Double totalAmount) {
       this.user        = user;
-      this.books       = books;
+      this.books       = new ArrayList<>(books); //I am init this collection field here, to avoid null pointer exceptions
       this.totalAmount = totalAmount;
    }
 
    public Cart(User user, List<Book> books) {
       this.user  = user;
-      this.books = books;
+      this.books = new ArrayList<>(books);
    }
 }

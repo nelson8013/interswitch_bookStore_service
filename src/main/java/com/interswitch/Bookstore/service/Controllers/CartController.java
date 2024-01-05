@@ -1,5 +1,6 @@
 package com.interswitch.Bookstore.service.Controllers;
 
+import com.interswitch.Bookstore.service.Dtos.Requests.CartRequest;
 import com.interswitch.Bookstore.service.Models.Cart;
 import com.interswitch.Bookstore.service.Services.CartService;
 import org.springframework.http.HttpStatus;
@@ -20,8 +21,8 @@ public class CartController {
 
 
    @PostMapping("/cart/add-to-cart")
-   public ResponseEntity<Cart> addToCart(@RequestBody Cart newCart){
-      return new ResponseEntity<>(cartService.addToCart(newCart), HttpStatus.CREATED);
+   public ResponseEntity<Cart> addToCart(@RequestBody CartRequest request){
+      return new ResponseEntity<>(cartService.addToCart(request.getUserId(), request.getBookIds()), HttpStatus.CREATED);
    }
 
    @GetMapping("/viewCart/{userId}")
