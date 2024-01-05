@@ -23,4 +23,8 @@ public class BookHelperMethods {
       return combinedResult;
    }
 
+
+   public static Double totalAmountOfBooks(List<Book> books){
+      return books.stream().mapToDouble(Book::getPrice).sum();
+   }
 }

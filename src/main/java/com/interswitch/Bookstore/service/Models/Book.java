@@ -26,6 +26,8 @@ public class Book {
    private String author;
    private String yearOfPublication;
 
+   private Double price;
+
    @CreationTimestamp
    private LocalDateTime createdAt;
 
@@ -35,12 +37,13 @@ public class Book {
 
    public Book() {}
 
-   public Book(String title, BookGenre genre, String isbn, String author, String yearOfPublication) {
+   public Book(String title, BookGenre genre, String isbn, String author, String yearOfPublication, Double price) {
       this.title  = title;
       this.genre  = genre;
       this.isbn   = isbn;
       this.author = author;
       this.yearOfPublication = yearOfPublication;
+      this.price  = price;
       this.createdAt = LocalDateTime.now();
    }
 
