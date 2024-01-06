@@ -6,4 +6,8 @@ public class IllegalPaymentOptionException extends RuntimeException {
       super(message);
    }
 
+   public IllegalPaymentOptionException(Throwable cause) {
+      super(cause);
+   }
+
 }
