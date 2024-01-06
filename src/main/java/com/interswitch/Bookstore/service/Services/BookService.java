@@ -15,22 +15,36 @@ import java.util.Collections;
 import java.util.List;
 
 
+/**
+ * The Book service.
+ *
+ * @author Nelson Ekpenyong
+ */
 @Service
 public class BookService implements BookServiceInterface {
 
-   private final BookRepository bookRepository;
-   private static final Logger LOGGER = LoggerFactory.getLogger(BookService.class);
+    private final BookRepository bookRepository;
+    private static final Logger LOGGER = LoggerFactory.getLogger(BookService.class);
 
 
-   public BookService(BookRepository bookRepository) {
+   /**
+    * Instantiates a new Book service with the BookRepository and the book's initializer.
+    *
+    * @param bookRepository the book repository
+    */
+    public BookService(BookRepository bookRepository) {
       this.bookRepository = bookRepository;
       initializeBooks();
    }
 
 
-   @Override
-   @PostConstruct
-   public void initializeBooks() {
+
+   /**
+    * Initializes the Database with 10 books.
+    */
+    @Override
+    @PostConstruct
+    public void initializeBooks() {
 
       if (bookRepository.count() == 0) {
          Book chinaTown           = new Book("china Town",         BookGenre.THRILLER, "789-0-4341-1347-0", "Jackie Chan", "1998", 350.0);
@@ -51,8 +65,13 @@ public class BookService implements BookServiceInterface {
 
    }
 
-   @Override
-   public List<Book> books() {
+
+   /**
+    * Get the list of all books.
+    * @return The list of books.
+    */
+    @Override
+    public List<Book> books() {
       try {
 
          return bookRepository.findAll();
@@ -63,8 +82,16 @@ public class BookService implements BookServiceInterface {
       }
    }
 
-   @Override
-   public Book book(Long id) {
+
+
+   /**
+    * Get a books by the book's id.
+    *
+    * @param id The book id.
+    * @return The book.
+    */
+    @Override
+    public Book book(Long id) {
       try {
 
          return bookRepository.findById(id)
@@ -76,8 +103,26 @@ public class BookService implements BookServiceInterface {
       }
    }
 
-   @Override
-   public List<Book> getBookByTitle(String title) {
+
+   /**
+    * Get a list of books by the book's ids.
+    *
+    * @param bookIds The book ids.
+    * @return The list of books.
+    */
+    List<Book>  getAllBooksById( List<Long> bookIds ){
+      return bookRepository.findAllById(bookIds);
+   }
+
+
+   /**
+    * Get a list of books by the book's title.
+    *
+    * @param title The book title.
+    * @return The list of books.
+    */
+    @Override
+    public List<Book> getBookByTitle(String title) {
       try {
 
          List<Book> books = bookRepository.findByTitle(title);
@@ -94,8 +139,15 @@ public class BookService implements BookServiceInterface {
       }
    }
 
-   @Override
-   public List<Book> getBookByAuthor(String author) {
+
+   /**
+    * Get a list of books by the book's author.
+    *
+    * @param author The book author.
+    * @return The list of books.
+    */
+    @Override
+    public List<Book> getBookByAuthor(String author) {
       try {
          List<Book> books = bookRepository.findByAuthor(author);
 
@@ -110,8 +162,15 @@ public class BookService implements BookServiceInterface {
       }
    }
 
-   @Override
-   public List<Book> getBookByPublicationYear(String year) {
+
+   /**
+    * Get a list of books by the book's year of publication.
+    *
+    * @param year The book's year of publication.
+    * @return The list of books.
+    */
+    @Override
+    public List<Book> getBookByPublicationYear(String year) {
       try {
          List<Book> books = bookRepository.findByYearOfPublication(year);
 
@@ -126,8 +185,15 @@ public class BookService implements BookServiceInterface {
       }
    }
 
-   @Override
-   public List<Book> getBookByGenre(BookGenre genre) {
+
+   /**
+    * Get a list of books by the book's genre.
+    *
+    * @param genre The book's genre.
+    * @return The list of books.
+    */
+    @Override
+    public List<Book> getBookByGenre(BookGenre genre) {
       try{
 
          return bookRepository.findByGenre(genre);

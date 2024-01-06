@@ -15,6 +15,13 @@ import java.util.*;
 
 import static com.interswitch.Bookstore.service.Utils.BookHelperMethods.*;
 
+
+/**
+ * The Book controller.
+ *
+ * @author Nelson Ekpenyong
+ *
+ * */
 @RestController
 public class BookController {
 
@@ -31,15 +38,15 @@ public class BookController {
       return ResponseEntity.ok(bookService.books());
    }
 
-  @GetMapping("/books/{id}")
-  public ResponseEntity<Book> book(@PathVariable("id") Long id) {
+   @GetMapping("/books/{id}")
+   public ResponseEntity<Book> book(@PathVariable("id") Long id) {
      return ResponseEntity.ok(bookService.book(id));
   }
 
-  @GetMapping("/books/title")
-  public ResponseEntity<List<Book>> bookByTitle(@RequestParam String title) {
+   @GetMapping("/books/title")
+   public ResponseEntity<List<Book>> bookByTitle(@RequestParam String title) {
       return ResponseEntity.ok(bookService.getBookByTitle(title));
-  }
+   }
 
    @GetMapping("/books/author")
    public ResponseEntity<List<Book>> bookByAuthor(@RequestParam String author) {
@@ -55,7 +62,6 @@ public class BookController {
    public ResponseEntity<List<Book>> bookByYear(@RequestParam BookGenre genre) {
       return ResponseEntity.ok(bookService.getBookByGenre(genre));
    }
-
 
 
    @GetMapping("/books/search")

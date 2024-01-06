@@ -1,14 +1,11 @@
 package com.interswitch.Bookstore.service.Models;
 
+import com.interswitch.Bookstore.service.Enums.PaymentOptions;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
-import lombok.ToString;
-import org.hibernate.annotations.CreationTimestamp;
-import org.hibernate.annotations.UpdateTimestamp;
 
 import java.time.LocalDateTime;
-import java.util.List;
 
 @Entity
 @Getter
@@ -22,15 +19,25 @@ public class PurchaseHistory {
    @JoinColumn(name = "user_id")
    private User user;
 
-   @OneToMany(cascade = CascadeType.ALL)
-   private List<Book> books;
+   private int numberOfBooks;
 
    @Column(name = "total_amount")
    private Double totalAmount;
 
-   @CreationTimestamp
-   private LocalDateTime createdAt;
+   private PaymentOptions paymentMethod;
 
-   @UpdateTimestamp
-   private LocalDateTime updatedAt;
+   private LocalDateTime transactionTime;
+
+   public PurchaseHistory(){}
+
+   public PurchaseHistory(User user, int numberOfBooks, Double totalAmount, LocalDateTime transactionTime, PaymentOptions paymentMethod) {
+      this.user            = user;
+      this.numberOfBooks   = numberOfBooks;
+      this.totalAmount     = totalAmount;
+      this.transactionTime = transactionTime;
+      this.paymentMethod   = paymentMethod;
+   }
+
+
+
 }
