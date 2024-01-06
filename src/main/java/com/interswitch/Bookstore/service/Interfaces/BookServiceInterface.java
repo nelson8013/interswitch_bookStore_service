@@ -7,7 +7,6 @@ import java.util.List;
 import java.util.Optional;
 
 public interface BookServiceInterface {
-   void initializeBooks();
    List<Book> books();
    Book book(Long id);
    List<Book> getBookByTitle(String title);

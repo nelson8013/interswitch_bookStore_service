@@ -24,7 +24,7 @@ import java.util.List;
 public class BookService implements BookServiceInterface {
 
     private final BookRepository bookRepository;
-    private static final Logger LOGGER = LoggerFactory.getLogger(BookService.class);
+   private static final Logger LOGGER = LoggerFactory.getLogger(BookService.class);
 
 
    /**
@@ -34,36 +34,7 @@ public class BookService implements BookServiceInterface {
     */
     public BookService(BookRepository bookRepository) {
       this.bookRepository = bookRepository;
-      initializeBooks();
-   }
-
-
-
-   /**
-    * Initializes the Database with 10 books.
-    */
-    @Override
-    @PostConstruct
-    public void initializeBooks() {
-
-      if (bookRepository.count() == 0) {
-         Book chinaTown           = new Book("china Town",         BookGenre.THRILLER, "789-0-4341-1347-0", "Jackie Chan", "1998", 350.0);
-         Book theGreatGatsby      = new Book("The Great Gatsby",   BookGenre.FICTION, "978-0-7432-7356-5", "F. Scott Fitzgerald", "1925", 300.0);
-         Book intoTheWild         = new Book("Into the Wild",      BookGenre.FICTION, "978-0-385-48680-2", "Jon Krakauer", "1996", 300.0);
-         Book orientExpressMurder = new Book("Murder on the Orient Express", BookGenre.MYSTERY, "978-0-06-2693662", "Agatha Christie", "1934", 659.0);
-         Book theHobbit           = new Book("The Hobbit",         BookGenre.FICTION, "978-0-618-63420-0", "J.R.R. Tolkien", "1937", 522.0);
-         Book theRaven            = new Book("The Raven",          BookGenre.POETRY, "978-1-84749-310-3", "Edgar Allan Poe", "1845", 522.0);
-         Book it                  = new Book("It",                 BookGenre.HORROR, "978-0451169518", "Stephen King", "1986", 800.0);
-         Book prideAndPrejudice   = new Book("Pride and Prejudice",BookGenre.FICTION, "978-1-85326-000-9", "Jane Austen", "1813", 429.0);
-         Book catch22             = new Book("Catch-22",           BookGenre.SATIRE, "978-0-684-85358-7", "Joseph Heller", "1961", 429.0);
-         Book tattooGirl          = new Book("The Girl with the Dragon Tattoo", BookGenre.THRILLER, "978-0-307-45440-6", "Stieg Larsson", "2005", 750.0);
-
-         bookRepository.saveAll(Arrays.asList(chinaTown, theGreatGatsby, intoTheWild, orientExpressMurder,theHobbit, theRaven, it, prideAndPrejudice, catch22, tattooGirl));
-
-         LOGGER.info("Initialized default books");
-      }
-
-   }
+    }
 
 
    /**

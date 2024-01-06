@@ -16,7 +16,7 @@ public interface BookRepository extends JpaRepository<Book, Long> {
    List<Book> findByGenre(BookGenre genre);
 
    /*
-    * //Todo: Nelson, try and recreate this query using JPA keywords
+    * //Todo: Nelson, don't forget to  recreate dis ur query using JPA keywords
     *  SELECT b.* FROM Book b
     *  WHERE LOWER(b.title) LIKE LOWER(CONCAT('%', :searchTerm, '%'))
     *  OR LOWER(b.author) LIKE LOWER(CONCAT('%', :searchTerm, '%'))

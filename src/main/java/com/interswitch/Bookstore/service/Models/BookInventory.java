@@ -28,4 +28,12 @@ public class BookInventory {
    @UpdateTimestamp
    private LocalDateTime updatedAt;
 
+
+   public BookInventory(){}
+
+   public BookInventory(Book book, Integer quantity) {
+      this.book      = book;
+      this.quantity  = quantity;
+      this.createdAt = LocalDateTime.now();
+   }
 }
