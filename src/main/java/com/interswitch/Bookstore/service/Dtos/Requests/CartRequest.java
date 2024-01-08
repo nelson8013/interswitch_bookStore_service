@@ -12,4 +12,5 @@ import java.util.List;
 public class CartRequest {
    private Long userId;
    private List<Long> bookIds;
+   private List<Integer> quantities;
 }

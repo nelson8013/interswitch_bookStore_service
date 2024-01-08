@@ -1,6 +1,7 @@
 package com.interswitch.Bookstore.service.Utils;
 
 import com.interswitch.Bookstore.service.Models.Book;
+import com.interswitch.Bookstore.service.Models.BookCartItem;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -24,7 +25,9 @@ public class BookHelperMethods {
    }
 
 
-   public static Double totalAmountOfBooks(List<Book> books){
-      return books.stream().mapToDouble(Book::getPrice).sum();
+   public static Double totalAmountOfBooks(List<BookCartItem> bookItems){
+      return bookItems.stream()
+              .mapToDouble(item -> item.getQuantity() * item.getBook().getPrice())
+              .sum();
    }
 }

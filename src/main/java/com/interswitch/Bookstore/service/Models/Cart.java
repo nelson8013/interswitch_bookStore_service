@@ -11,6 +11,8 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
+import static com.interswitch.Bookstore.service.Utils.BookHelperMethods.totalAmountOfBooks;
+
 /**
  * The type Cart.
  */
@@ -26,9 +28,14 @@ public class Cart {
    @JoinColumn(name = "user_id")
    private User user;
 
-   @ManyToMany
-   @JoinTable(name = "cart_books", joinColumns = @JoinColumn(name = "cart_id"),inverseJoinColumns = @JoinColumn(name = "book_id"))
-   private List<Book> books;
+//   @ManyToMany
+//   @JoinTable(name = "cart_books", joinColumns = @JoinColumn(name = "cart_id"),inverseJoinColumns = @JoinColumn(name = "book_id"))
+//   private List<Book> books;
+
+   @OneToMany(mappedBy = "cart", cascade = CascadeType.PERSIST, orphanRemoval = true)
+   private List<BookCartItem> bookItems = new ArrayList<>();
+
+
    private Double totalAmount;
 
    @Enumerated(EnumType.STRING)
@@ -44,31 +51,31 @@ public class Cart {
    /**
     * Instantiates a new Cart without arguments.
     */
-   public Cart() {}
+    public Cart() {}
+
 
    /**
     * Instantiates a new Cart with 4 arguments.
     *
-    * @param user          the user
-    * @param books         the books
-    * @param totalAmount   the total amount
-    * @param paymentStatus the payment status
+    * @param user           the user
+    * @param bookItems      object containing the number of books in a cart and quantity of each book
+    * @param paymentStatus  the payment status
     */
-   public Cart(User user, List<Book> books, Double totalAmount,PaymentStatus paymentStatus) {
+    public Cart(User user, List<BookCartItem> bookItems,  PaymentStatus paymentStatus) {
       this.user          = user;
-      this.books         = new ArrayList<>(books); //I am init this collection field here, to avoid null pointer exceptions
-      this.totalAmount   = totalAmount;
-      this.paymentStatus = PaymentStatus.PENDING;
+      this.bookItems     = new ArrayList<>(bookItems);
+      this.totalAmount   = totalAmountOfBooks(bookItems);
+      this.paymentStatus = paymentStatus.PENDING;
    }
 
    /**
     * Instantiates a new Cart with two arguments.
     *
-    * @param user  the user
-    * @param books the books
+    * @param user      the user
+    * @param bookItems object containing the number of books in a cart and quantity of each book
     */
-   public Cart(User user, List<Book> books) {
+    public Cart(User user, List<BookCartItem> bookItems) {
       this.user  = user;
-      this.books = new ArrayList<>(books);
+      this.bookItems = new ArrayList<>(bookItems);
    }
 }
