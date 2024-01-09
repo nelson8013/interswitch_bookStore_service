@@ -82,7 +82,8 @@ public class BookService implements BookServiceInterface {
     * @param bookIds The book ids.
     * @return The list of books.
     */
-    List<Book>  getAllBooksById( Collection<Long> bookIds ){
+   @Override
+   public List<Book>  getAllBooksById( Collection<Long> bookIds ){
       return bookRepository.findAllById(bookIds);
    }
 
