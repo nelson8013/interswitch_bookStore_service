@@ -1,8 +1,8 @@
 package com.interswitch.Bookstore.service.Controllers;
 
 import com.interswitch.Bookstore.service.Dtos.Requests.Cart.CartRequest;
-import com.interswitch.Bookstore.service.Dtos.Responses.AddToCartResponse;
-import com.interswitch.Bookstore.service.Dtos.Responses.ViewCartResponse;
+import com.interswitch.Bookstore.service.Dtos.Responses.Cart.AddToCartResponse;
+import com.interswitch.Bookstore.service.Dtos.Responses.Cart.ViewCartResponse;
 import com.interswitch.Bookstore.service.Services.CartService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

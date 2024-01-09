@@ -1,7 +1,6 @@
 package com.interswitch.Bookstore.service.Interfaces;
 
-import com.interswitch.Bookstore.service.Dtos.Responses.PurchaseHistoryResponse;
-import com.interswitch.Bookstore.service.Models.PurchaseHistory;
+import com.interswitch.Bookstore.service.Dtos.Responses.PurchaseHistory.PurchaseHistoryResponse;
 
 import java.util.List;
 

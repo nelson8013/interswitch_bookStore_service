@@ -1,4 +1,4 @@
-package com.interswitch.Bookstore.service.Dtos.Responses;
+package com.interswitch.Bookstore.service.Dtos.Responses.PurchaseHistory;
 
 import lombok.Getter;
 import lombok.Setter;

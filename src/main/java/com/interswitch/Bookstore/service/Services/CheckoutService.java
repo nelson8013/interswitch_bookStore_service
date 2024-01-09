@@ -6,7 +6,9 @@ import com.interswitch.Bookstore.service.Exceptions.CartExceptions.CartNotFoundE
 import com.interswitch.Bookstore.service.Exceptions.PaymentExceptions.IllegalPaymentOptionException;
 import com.interswitch.Bookstore.service.Exceptions.PaymentExceptions.PaymentAlreadyMadeException;
 import com.interswitch.Bookstore.service.Interfaces.CheckoutServiceInterface;
+import com.interswitch.Bookstore.service.Models.Book;
 import com.interswitch.Bookstore.service.Models.Cart;
+import com.interswitch.Bookstore.service.Models.CartBook;
 import com.interswitch.Bookstore.service.Models.User;
 import org.springframework.stereotype.Service;
 
@@ -20,17 +22,20 @@ public class CheckoutService implements CheckoutServiceInterface {
 
     private final CartService cartService;
     private final UserService userService;
+    private final BookInventoryService bookInventoryService;
 
    /**
     * Instantiates a new Checkout service and injects the CartService and UserService into it.
     *
-    * @param cartService the cart service
-    * @param userService the user service
+    * @param cartService          the cart service
+    * @param userService          the user service
+    * @param bookInventoryService the book inventory service
     */
-    public CheckoutService(CartService cartService, UserService userService) {
-      this.cartService = cartService;
-      this.userService = userService;
-   }
+    public CheckoutService(CartService cartService, UserService userService, BookInventoryService bookInventoryService) {
+      this.cartService           = cartService;
+      this.userService           = userService;
+      this.bookInventoryService  = bookInventoryService;
+    }
 
 
 
@@ -87,6 +92,8 @@ public class CheckoutService implements CheckoutServiceInterface {
     @Override
     public void processWebPayment(Cart cart) {
       cart.setPaymentStatus(PaymentStatus.SUCCESS);
+      cart.setActive(false);
+      updateBookInventoryQuantity(cart);
    }
 
 
@@ -98,6 +105,8 @@ public class CheckoutService implements CheckoutServiceInterface {
     @Override
     public void processUSSDPayment(Cart cart) {
       cart.setPaymentStatus(PaymentStatus.SUCCESS);
+      cart.setActive(false);
+      updateBookInventoryQuantity(cart);
    }
 
 
@@ -110,5 +119,16 @@ public class CheckoutService implements CheckoutServiceInterface {
     @Override
     public void processTransferPayment(Cart cart) {
       cart.setPaymentStatus(PaymentStatus.SUCCESS);
+      cart.setActive(false);
+      updateBookInventoryQuantity(cart);
+   }
+
+   void updateBookInventoryQuantity(Cart cart) {
+      for (CartBook cartBook : cart.getCartbooks()) {
+         Book book = cartBook.getBook();
+         int quantity = cartBook.getQuantity();
+
+         bookInventoryService.updateBookQuantity(book.getId(), bookInventoryService.getBookQuantity(book.getId()) - quantity);
+      }
    }
 }

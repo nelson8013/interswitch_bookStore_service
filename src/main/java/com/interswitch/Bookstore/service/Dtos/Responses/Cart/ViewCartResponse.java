@@ -1,4 +1,4 @@
-package com.interswitch.Bookstore.service.Dtos.Responses;
+package com.interswitch.Bookstore.service.Dtos.Responses.Cart;
 
 import com.interswitch.Bookstore.service.Models.Book;
 import com.interswitch.Bookstore.service.Models.CartBook;

@@ -1,7 +1,6 @@
 package com.interswitch.Bookstore.service.Controllers;
 
-import com.interswitch.Bookstore.service.Dtos.Responses.PurchaseHistoryResponse;
-import com.interswitch.Bookstore.service.Models.PurchaseHistory;
+import com.interswitch.Bookstore.service.Dtos.Responses.PurchaseHistory.PurchaseHistoryResponse;
 import com.interswitch.Bookstore.service.Services.PurchaseHistoryService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

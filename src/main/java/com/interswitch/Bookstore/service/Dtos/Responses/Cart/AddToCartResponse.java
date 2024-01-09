@@ -1,4 +1,4 @@
-package com.interswitch.Bookstore.service.Dtos.Responses;
+package com.interswitch.Bookstore.service.Dtos.Responses.Cart;
 
 import com.interswitch.Bookstore.service.Enums.PaymentStatus;
 import com.interswitch.Bookstore.service.Models.Book;

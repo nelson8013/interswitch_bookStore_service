@@ -1,8 +1,8 @@
 package com.interswitch.Bookstore.service.Services;
 
 import com.interswitch.Bookstore.service.Dtos.Requests.Cart.CartRequest;
-import com.interswitch.Bookstore.service.Dtos.Responses.AddToCartResponse;
-import com.interswitch.Bookstore.service.Dtos.Responses.ViewCartResponse;
+import com.interswitch.Bookstore.service.Dtos.Responses.Cart.AddToCartResponse;
+import com.interswitch.Bookstore.service.Dtos.Responses.Cart.ViewCartResponse;
 import com.interswitch.Bookstore.service.Enums.PaymentStatus;
 import com.interswitch.Bookstore.service.Exceptions.BookExceptions.BookNotFoundException;
 import com.interswitch.Bookstore.service.Exceptions.BookInventoryExceptions.BookInventoryNotFoundException;
@@ -48,8 +48,8 @@ public class CartService implements CartServiceInterface {
       this.bookService          = bookService;
       this.cartRepository       = cartRepository;
       this.userService          = userService;
-       this.cartbookrepository = cartbookrepository;
-       this.bookInventoryService = bookInventoryService;
+      this.cartbookrepository   = cartbookrepository;
+      this.bookInventoryService = bookInventoryService;
    }
 
 
@@ -98,7 +98,7 @@ public class CartService implements CartServiceInterface {
 
       User user = userService.getUser(request.getUserId());
 
-      Map<Long, Long> bookDetail = request.getBooksAndQuantities()
+      Map<Long, Long> bookDetail = request.getBooksAndQuantities()//Todo: read about this
               .stream().collect(Collectors.toMap( book-> book.getBookId(), book-> book.getQuantity(), (a,b) -> a ));
 
 
@@ -108,7 +108,7 @@ public class CartService implements CartServiceInterface {
 
       if (books.isEmpty()) throw new BookNotFoundException("No books found with the given IDs");
 
-      if (books.size() !=  bookDetail.keySet().size()) throw new IllegalArgumentException("Mismatch between bookIds and quantities lists");
+      if (books.size() !=  bookDetail.keySet().size()) throw new IllegalArgumentException("Th number of bookIds and quantities do not match");
 
       List<CartBook> cartBooks = new ArrayList<>();
 
@@ -143,7 +143,7 @@ public class CartService implements CartServiceInterface {
     * View to cart.
     *
     * @param userId The user id.
-    * @return The book object containing the list of books.
+    * @return The book object containing the list of books, the total amount, the order status, the date of the order.
     */
     @Override
     public ViewCartResponse viewCart(Long  userId) {

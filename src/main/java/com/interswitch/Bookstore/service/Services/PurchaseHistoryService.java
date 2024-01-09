@@ -1,6 +1,6 @@
 package com.interswitch.Bookstore.service.Services;
 
-import com.interswitch.Bookstore.service.Dtos.Responses.PurchaseHistoryResponse;
+import com.interswitch.Bookstore.service.Dtos.Responses.PurchaseHistory.PurchaseHistoryResponse;
 import com.interswitch.Bookstore.service.Interfaces.PurchaseHistoryInterface;
 import com.interswitch.Bookstore.service.Repositories.PurchaseHistoryRepository;
 import org.springframework.stereotype.Service;
@@ -35,11 +35,11 @@ public class PurchaseHistoryService implements PurchaseHistoryInterface {
 
       return rawResults.stream()
               .map(result -> new PurchaseHistoryResponse(
-                      (Long) result[0],           // user_id
-                      Math.toIntExact((Long) result[1]),           // number_of_books
-                      (Double) result[2],         // total_amount
-                      ((Timestamp) result[3]).toLocalDateTime(), // transaction_time
-                      (String) result[4]          // payment_method
+                      (Long) result[0],
+                      Math.toIntExact((Long) result[1]),
+                      (Double) result[2],
+                      ((Timestamp) result[3]).toLocalDateTime(),
+                      (String) result[4]
               ))
               .collect(Collectors.toList());
    }

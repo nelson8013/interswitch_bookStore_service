@@ -1,13 +1,10 @@
 package com.interswitch.Bookstore.service.Repositories;
 
-import com.interswitch.Bookstore.service.Dtos.Responses.PurchaseHistoryResponse;
 import com.interswitch.Bookstore.service.Models.PurchaseHistory;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
-import java.time.LocalDateTime;
 import java.util.List;
-import java.util.stream.Collectors;
 
 public interface PurchaseHistoryRepository extends JpaRepository<PurchaseHistory, Long> {
 
