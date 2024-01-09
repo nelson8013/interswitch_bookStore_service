@@ -51,6 +51,7 @@ Add Book To Cart
 - **Endpoint:** `POST /cart/add-to-cart`
 - **Request Body:**
   - `addToCartRequest` - pictorial detail of the cart.
+    
     ![image](https://github.com/nelson8013/interswitch_bookStore_service/assets/12644704/75df85ac-54dc-450f-a772-398147411652)
 
 
