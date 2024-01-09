@@ -1,6 +1,5 @@
 package com.interswitch.Bookstore.service.Models;
 
-import com.interswitch.Bookstore.service.Dtos.Requests.CartRequest;
 import com.interswitch.Bookstore.service.Enums.BookGenre;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;

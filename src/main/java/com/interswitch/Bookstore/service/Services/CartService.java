@@ -1,15 +1,15 @@
 package com.interswitch.Bookstore.service.Services;
 
+import com.interswitch.Bookstore.service.Dtos.Requests.Cart.CartRequest;
 import com.interswitch.Bookstore.service.Dtos.Responses.AddToCartResponse;
 import com.interswitch.Bookstore.service.Dtos.Responses.ViewCartResponse;
 import com.interswitch.Bookstore.service.Enums.PaymentStatus;
 import com.interswitch.Bookstore.service.Exceptions.BookExceptions.BookNotFoundException;
-import com.interswitch.Bookstore.service.Exceptions.BookInventoryExceptions.InsufficientQuantityException;
+import com.interswitch.Bookstore.service.Exceptions.BookInventoryExceptions.BookInventoryNotFoundException;
+import com.interswitch.Bookstore.service.Exceptions.CartExceptions.CartNotFoundException;
 import com.interswitch.Bookstore.service.Interfaces.CartServiceInterface;
-import com.interswitch.Bookstore.service.Models.Book;
-import com.interswitch.Bookstore.service.Models.BookCartItem;
-import com.interswitch.Bookstore.service.Models.Cart;
-import com.interswitch.Bookstore.service.Models.User;
+import com.interswitch.Bookstore.service.Models.*;
+import com.interswitch.Bookstore.service.Repositories.CartBookRepository;
 import com.interswitch.Bookstore.service.Repositories.CartRepository;
 import org.springframework.stereotype.Service;
 
@@ -27,6 +27,8 @@ import static com.interswitch.Bookstore.service.Utils.BookHelperMethods.totalAmo
 public class CartService implements CartServiceInterface {
 
    private final CartRepository cartRepository;
+
+   private final CartBookRepository cartbookrepository;
    private final UserService userService;
    private final BookService bookService;
 
@@ -36,16 +38,18 @@ public class CartService implements CartServiceInterface {
    /**
     * Instantiates a new CartService and injects the CartRepository, UserService, BookService, and BookInventoryService into it.
     *
-    * @param cartRepository       the cart repository
-    * @param userService          the user service
     * @param bookService          the book service
+    * @param userService          the user service
+    * @param cartRepository       the cart repository
+    * @param cbr
     * @param bookInventoryService the book inventory service
     */
-    public CartService(BookService bookService, UserService userService, CartRepository cartRepository, BookInventoryService bookInventoryService) {
+    public CartService(BookService bookService, UserService userService, CartRepository cartRepository, CartBookRepository cartbookrepository, BookInventoryService bookInventoryService) {
       this.bookService          = bookService;
       this.cartRepository       = cartRepository;
       this.userService          = userService;
-      this.bookInventoryService = bookInventoryService;
+       this.cartbookrepository = cartbookrepository;
+       this.bookInventoryService = bookInventoryService;
    }
 
 
@@ -58,7 +62,13 @@ public class CartService implements CartServiceInterface {
     */
     @Override
     public Cart getCartByUser(User user){
-      return cartRepository.findByUser(user);
+       Cart cart = cartRepository.findByUser(user);
+
+       if(Objects.isNull(cart)){
+          cart = new Cart();
+          cart.setUser(user);
+       }
+      return cart;
    }
 
 
@@ -82,149 +92,64 @@ public class CartService implements CartServiceInterface {
     * @param bookIds The name
     * @return The persisted cart object.
     */
-    //    @Override
-//    public AddToCartResponse addToCart(Long userId, List<Long> bookIds) {
-//
-//      User user = userService.getUser(userId);
-//
-//      List<Book> books = bookService.getAllBooksById(bookIds);
-//
-//      if (books.isEmpty()) throw new BookNotFoundException("No books found with the given IDs");
-//
-//      Cart cart = getCartByUser(user);
-//
-//      if(cart == null){
-//         cart = new Cart( user, new ArrayList<>(books), totalAmountOfBooks(books), PaymentStatus.PENDING );
-//      }else{
-//         cart.getBooks().addAll(books);
-//         cart.setTotalAmount(cart.getTotalAmount() + totalAmountOfBooks(books));
-//      }
-//      saveCart(cart);
-//
-//      return new AddToCartResponse(user, books, cart.getTotalAmount(), PaymentStatus.PENDING);
-//   }
+
+   @Override
+   public AddToCartResponse addToCart( CartRequest request) {
+
+      User user = userService.getUser(request.getUserId());
+
+      Map<Long, Long> bookDetail = request.getBooksAndQuantities()
+              .stream().collect(Collectors.toMap( book-> book.getBookId(), book-> book.getQuantity(), (a,b) -> a ));
 
 
+      List<Book> books = bookService.getAllBooksById(bookDetail.keySet());
 
+      Cart cart = getCartByUser(user);
 
+      if (books.isEmpty()) throw new BookNotFoundException("No books found with the given IDs");
 
-//   @Override
-//   public void addToCart(Long userId, List<Long> bookIds, List<Integer> quantities) {
-//      User user = userService.getUser(userId); //✔️
-//
-//
-//     if (bookIds.size() != quantities.size()) {
-//         throw new IllegalArgumentException("Mismatch between bookIds and quantities lists");
-//      }
-//
-//      Cart cart = new Cart(user, new ArrayList<>(), PaymentStatus.PENDING);
-//      System.out.println("THE CART:::::" + cart);
-//      cart = saveCart(cart);
-//
-//      List<BookCartItem> bookItems = new ArrayList<>();
-//
-//      for (int i = 0; i < bookIds.size(); i++) {
-//         Long bookId = bookIds.get(i);
-//         int quantity = quantities.get(i);
-//
-//
-//         Book book = bookService.book(bookId);
-//
-//         if (book == null) {
-//            throw new BookNotFoundException("Book not found with ID: " + bookId);
-//         }
-//
-//
-//         BookCartItem item = new BookCartItem(book, cart, quantity);
-//         System.out.println("ITEM:::::::::::::" + item);
-//
-//         item.setCart(new Cart(user, Collections.singletonList(item), PaymentStatus.PENDING));
-//
-////         System.out.printf("ITEM AFTER::::::", item);
-////         bookItems.add(item);
-////         System.out.println("THE BOOK ITEMS AFTER::::::" + bookItems);
-//
-//      }
-//
-//      cart.setBookItems(bookItems);
-//
-//      saveCart(cart);
-//
-//
-////      return new AddToCartResponse(user, cart.getBookItems(), cart.getTotalAmount(), PaymentStatus.PENDING);
-//   }
+      if (books.size() !=  bookDetail.keySet().size()) throw new IllegalArgumentException("Mismatch between bookIds and quantities lists");
 
+      List<CartBook> cartBooks = new ArrayList<>();
 
-   public void addToCart(Long userId, List<Long> bookIds, List<Integer> quantities) {
-      User user = userService.getUser(userId); //✔️
+      for (int i = 0; i < books.size(); i++) {
+         Book book = books.get(i);
 
-      Cart cart = new Cart(user, new ArrayList<>(), PaymentStatus.PENDING);
-      cart = saveCart(cart);
-      Cart usersCart = getCartByUser(user); //✔
+         if(!bookDetail.containsKey(book.getId())){
+            continue;
+         }
+         Long requestedQuantity =   bookDetail.get(book.getId());
 
-      System.out.println("THE USERS CART:::::" + usersCart);
-
-      if (bookIds.size() != quantities.size()) {
-         throw new IllegalArgumentException("Book IDs and quantities must have the same size.");
-      }
-
-      for (int i = 0; i < bookIds.size(); i++) {
-         Long bookId      = bookIds.get(i);
-         Integer quantity = quantities.get(i);
-         Book book        = bookService.book(bookId);
-
-         Integer availableQuantity = bookInventoryService.getBookQuantity(bookId);
-
-         if (availableQuantity == null || availableQuantity < quantity) {
-            throw new InsufficientQuantityException(bookId, quantity, availableQuantity, "Insufficient quantity in stock.");
+         if (!bookInventoryService.doesBookExist(book.getId()) || bookInventoryService.getBookQuantity(book.getId()) < requestedQuantity) {
+            throw new BookInventoryNotFoundException("The requested book with ID: " + book.getId() + " is not available in sufficient quantity.");
          }
 
-         BookCartItem bookItem = new BookCartItem(book, usersCart, quantity);
-         usersCart.getBookItems().add(bookItem);
-         BookCartItem bookCartItem = null;
+         CartBook cartBook = new CartBook(book, cart, requestedQuantity.intValue());
+         cartBooks.add(cartBook);
+     }
 
-         for (BookCartItem item : usersCart.getBookItems()) {
-            if (item.getBook().getId().equals(bookId)) {
-               bookCartItem = item;
-               break;
-            }
-         }
+      cart.getCartbooks().addAll(cartBooks);
 
-         if (bookCartItem == null) {
-             bookCartItem  = new BookCartItem(book, usersCart, quantity);
-             usersCart.getBookItems().add(bookCartItem);
-         }
+      cart.setTotalAmount(totalAmountOfBooks(cart.getCartbooks()));
+      saveCart(cart);
+      cartbookrepository.saveAll(cartBooks);
 
-         // Update quantity in cart (only needed if item already existed)
-//         if (bookCartItem.getQuantity() != quantity) {
-//            bookCartItem.setQuantity(quantity);
-//         }
-//         System.out.println("THE BOOK CART ITEMS:::::" + bookCartItem);
-
-         // Update quantity in cart
-//         bookCartItem.setQuantity(bookCartItem.getQuantity() + quantity);
-         saveCart(cart);
-
-         bookInventoryService.updateBookQuantity(bookId, availableQuantity - quantity);
-      }
-
-
+      return new AddToCartResponse(user, books, cart.getTotalAmount(), PaymentStatus.PENDING);
    }
 
+
+
    /**
-    * Add to cart.
+    * View to cart.
     *
     * @param userId The user id.
     * @return The book object containing the list of books.
     */
     @Override
     public ViewCartResponse viewCart(Long  userId) {
-      List<Cart> carts = cartRepository.findByUser_Id(userId);
-      List<BookCartItem> bookItems  = carts.stream()
-                              .flatMap(cart -> cart.getBookItems().stream())
-                              .collect(Collectors.toList());
+       Cart cart = cartRepository.findByUserIdWithBooks(userId).orElseThrow( ()-> new CartNotFoundException("Cart not found") );
 
-      return new ViewCartResponse(bookItems);
+      return new ViewCartResponse(cart.getCartbooks(), cart.getTotalAmount(), cart.isActive(), cart.getCreatedAt());
    }
 
 }

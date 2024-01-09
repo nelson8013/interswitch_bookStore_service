@@ -1,4 +1,4 @@
-package com.interswitch.Bookstore.service.Dtos.Requests;
+package com.interswitch.Bookstore.service.Dtos.Requests.Checkout;
 
 import com.interswitch.Bookstore.service.Enums.PaymentOptions;
 import lombok.Getter;

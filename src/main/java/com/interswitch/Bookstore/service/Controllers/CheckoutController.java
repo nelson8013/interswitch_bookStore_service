@@ -1,7 +1,6 @@
 package com.interswitch.Bookstore.service.Controllers;
 
-import com.interswitch.Bookstore.service.Dtos.Requests.CartRequest;
-import com.interswitch.Bookstore.service.Dtos.Requests.CheckoutRequest;
+import com.interswitch.Bookstore.service.Dtos.Requests.Checkout.CheckoutRequest;
 import com.interswitch.Bookstore.service.Models.Cart;
 import com.interswitch.Bookstore.service.Services.CheckoutService;
 import org.springframework.http.HttpStatus;

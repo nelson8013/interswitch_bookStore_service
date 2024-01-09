@@ -11,6 +11,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import java.util.Arrays;
+import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 
@@ -81,7 +82,7 @@ public class BookService implements BookServiceInterface {
     * @param bookIds The book ids.
     * @return The list of books.
     */
-    List<Book>  getAllBooksById( List<Long> bookIds ){
+    List<Book>  getAllBooksById( Collection<Long> bookIds ){
       return bookRepository.findAllById(bookIds);
    }
 
