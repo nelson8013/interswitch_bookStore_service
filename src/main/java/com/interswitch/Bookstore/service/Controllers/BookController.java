@@ -34,32 +34,32 @@ public class BookController {
    }
 
    @GetMapping("/books")
-   public ResponseEntity<List<Book>> books() {
+   public ResponseEntity<List<Book>> getBooks() {
       return ResponseEntity.ok(bookService.books());
    }
 
    @GetMapping("/books/{id}")
-   public ResponseEntity<Book> book(@PathVariable("id") Long id) {
+   public ResponseEntity<Book> getBook(@PathVariable("id") Long id) {
      return ResponseEntity.ok(bookService.book(id));
   }
 
    @GetMapping("/books/title")
-   public ResponseEntity<List<Book>> bookByTitle(@RequestParam String title) {
+   public ResponseEntity<List<Book>> getBookByTitle(@RequestParam String title) {
       return ResponseEntity.ok(bookService.getBookByTitle(title));
    }
 
    @GetMapping("/books/author")
-   public ResponseEntity<List<Book>> bookByAuthor(@RequestParam String author) {
+   public ResponseEntity<List<Book>> getBookByAuthor(@RequestParam String author) {
       return ResponseEntity.ok(bookService.getBookByAuthor(author));
    }
 
    @GetMapping("/books/year")
-   public ResponseEntity<List<Book>> bookByYear(@RequestParam String year) {
+   public ResponseEntity<List<Book>> getBookByYear(@RequestParam String year) {
       return ResponseEntity.ok(bookService.getBookByPublicationYear(year));
    }
 
    @GetMapping("/books/genre")
-   public ResponseEntity<List<Book>> bookByYear(@RequestParam BookGenre genre) {
+   public ResponseEntity<List<Book>> getBookByGenre(@RequestParam BookGenre genre) {
       return ResponseEntity.ok(bookService.getBookByGenre(genre));
    }
 
