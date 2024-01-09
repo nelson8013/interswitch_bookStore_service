@@ -48,7 +48,7 @@ navigate to the application.properties file located at ``` Bookstore-service\src
 ### CART
 Add Book To Cart
 
-- **Endpoint:** `POST /register-drone`
+- **Endpoint:** `POST /cart/add-to-cart`
 - **Request Body:**
   - `DroneRequest` - Details of the drone.
     ![image](https://github.com/nelson8013/MusalaSoftDroneTask/assets/12644704/2814801d-1db3-45b4-bc77-752af895c6ff)
