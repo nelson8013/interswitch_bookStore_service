@@ -1,6 +1,6 @@
 # Online Book Store
 
-![image]([https://media.istockphoto.com/id/854284330/photo/online-library.jpg?s=2048x2048&w=is&k=20&c=uJEe62SvCrAU07QSEbE5hwnzSR2cPxRkBcBSsT4BxSs=](https://i.pinimg.com/564x/a9/cb/7d/a9cb7d045cdf52ccda8bc00851ac1a70.jpg)
+![image](https://i.pinimg.com/564x/a9/cb/7d/a9cb7d045cdf52ccda8bc00851ac1a70.jpg)
 
 ## PREREQUISITES
 
