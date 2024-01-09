@@ -11,17 +11,18 @@ Details for configuring your database.
 - Running on ```port: 3306```,
 - without a password ```password:   ```
 - with a ```user/username: root```
-- The application is to be run locally.
+- Then create a new database called ``` bookstore ```.
 
 
 ## Build Instructions
 1. Clone the repository.
-2. Navigate to the project directory [DroneService].
+2. Navigate to the project directory [Bookstore-service].
    ```bash 
     ./mvnw clean install
     ```
 
 ## Run Instructions
+Before running the application, navigate to the application.properties file located at ``` Bookstore-service\src\main\resources ``` update 
 1. Run the following command to start the application:
     ```bash 
     ./mvnw spring-boot:run
