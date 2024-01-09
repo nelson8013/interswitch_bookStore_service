@@ -4,5 +4,5 @@
 
 ## PREREQUISITES
 - You'll need an API client like Postman or Thunder client.
-- You'll also need to have MySQL installed locally on your machine. Running on port: 3306, without a password and with the user/username: root
+- You'll also need to have MySQL installed locally on your machine. Running on ```port: 3306```, without a password and with the ```user/username: root```
 - The project is to be run locally.
