@@ -46,3 +46,13 @@ navigate to the application.properties file located at ``` Bookstore-service\src
 - BASE URL: `http://127.0.0.1:5634/api/v1`
 
 ### CART
+Add Book To Cart
+
+- **Endpoint:** `POST /register-drone`
+- **Request Body:**
+  - `DroneRequest` - Details of the drone.
+    ![image](https://github.com/nelson8013/MusalaSoftDroneTask/assets/12644704/2814801d-1db3-45b4-bc77-752af895c6ff)
+
+- **Response:**
+  - Status: 201 Created
+  - Body: Details of the registered drone.
