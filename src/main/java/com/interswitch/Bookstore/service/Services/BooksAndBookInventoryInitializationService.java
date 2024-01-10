@@ -37,7 +37,8 @@ public class BooksAndBookInventoryInitializationService implements BooksAndBookI
    @PostConstruct
    public void initializeBooksAndBookInventory() {
       if (bookInventoryRepository.count() == 0) {
-         Book chinaTown           = new Book("china Town",         BookGenre.THRILLER, "789-0-4341-1347-0", "Jackie Chan", "1998", 350.0);
+         Book chinaTown           = new Book("china Town",         BookGenre.FICTION, "789-0-4341-1348-0", "Jackie Chan", "1998", 350.0);
+         Book westernCanada       = new Book("Western Canada",     BookGenre.THRILLER, "789-0-4341-1347-1", "Jack Altman", "1992", 750.0);
          Book theGreatGatsby      = new Book("The Great Gatsby",   BookGenre.FICTION, "978-0-7432-7356-5", "F. Scott Fitzgerald", "1925", 300.0);
          Book intoTheWild         = new Book("Into the Wild",      BookGenre.FICTION, "978-0-385-48680-2", "Jon Krakauer", "1996", 300.0);
          Book orientExpressMurder = new Book("Murder on the Orient Express", BookGenre.MYSTERY, "978-0-06-2693662", "Agatha Christie", "1934", 659.0);
@@ -49,7 +50,7 @@ public class BooksAndBookInventoryInitializationService implements BooksAndBookI
          Book tattooGirl          = new Book("The Girl with the Dragon Tattoo", BookGenre.THRILLER, "978-0-307-45440-6", "Stieg Larsson", "2005", 750.0);
 
          bookRepository.saveAll(Arrays.asList(
-                 chinaTown, theGreatGatsby, intoTheWild, orientExpressMurder,
+                 chinaTown, westernCanada, theGreatGatsby, intoTheWild, orientExpressMurder,
                  theHobbit, theRaven, it, prideAndPrejudice, catch22, tattooGirl
          ));
 
@@ -57,6 +58,7 @@ public class BooksAndBookInventoryInitializationService implements BooksAndBookI
 
 
          BookInventory chinaTownInv           = new BookInventory(chinaTown,           23);
+         BookInventory westernCanadaInv       = new BookInventory(westernCanada,       43);
          BookInventory theGreatGatsbyInv      = new BookInventory(theGreatGatsby,      12);
          BookInventory intoTheWildInv         = new BookInventory(intoTheWild,          4);
          BookInventory orientExpressMurderInv = new BookInventory(orientExpressMurder, 21);
@@ -69,7 +71,7 @@ public class BooksAndBookInventoryInitializationService implements BooksAndBookI
 
 
          bookInventoryRepository.saveAll(Arrays.asList(
-                 chinaTownInv, theGreatGatsbyInv, intoTheWildInv, orientExpressMurderInv,
+                 chinaTownInv, westernCanadaInv, theGreatGatsbyInv, intoTheWildInv, orientExpressMurderInv,
                  theHobbitInv, theRavenInv, itInv, prideAndPrejudiceInv, catch22Inv, tattooGirlInv
          ));
 

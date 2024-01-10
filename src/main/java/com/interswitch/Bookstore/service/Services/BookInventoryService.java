@@ -45,7 +45,7 @@ public class BookInventoryService implements BookInventoryServiceInterface {
     * @return list of inventory records
     */
     @Override
-    public List<BookInventory> inventory() {
+    public List<BookInventory> inventories() {
       return bookInventoryRepository.findAll();
    }
 

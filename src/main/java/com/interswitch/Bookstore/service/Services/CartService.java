@@ -36,12 +36,12 @@ public class CartService implements CartServiceInterface {
 
 
    /**
-    * Instantiates a new CartService and injects the CartRepository, UserService, BookService, and BookInventoryService into it.
+    * Instantiates a new CartService and injects the CartRepository, CartBookRepositoryUserService, BookService, and BookInventoryService into it.
     *
     * @param bookService          the book service
     * @param userService          the user service
     * @param cartRepository       the cart repository
-    * @param cbr
+    * @param cartbookrepository   the cart book repository
     * @param bookInventoryService the book inventory service
     */
     public CartService(BookService bookService, UserService userService, CartRepository cartRepository, CartBookRepository cartbookrepository, BookInventoryService bookInventoryService) {
