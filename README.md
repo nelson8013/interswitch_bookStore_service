@@ -53,7 +53,7 @@ navigate to the application.properties file located at ``` Bookstore-service\src
 - **Request Body:**
   - `addToCartRequest` - pictorial detail of the cart request.
     
-    ![image](https://github.com/nelson8013/interswitch_bookStore_service/assets/12644704/75df85ac-54dc-450f-a772-398147411652)
+  ![image](https://github.com/nelson8013/interswitch_bookStore_service/assets/12644704/75df85ac-54dc-450f-a772-398147411652)
 
 
 - **Response:**
@@ -61,7 +61,7 @@ navigate to the application.properties file located at ``` Bookstore-service\src
   - Body: Create cart response.
    - `addToCartResponse` - pictorial detail of the cart response.
      
-    ![image](https://github.com/nelson8013/interswitch_bookStore_service/assets/12644704/47011af6-7719-4e24-97d8-d8bbecb3370e)
+  ![image](https://github.com/nelson8013/interswitch_bookStore_service/assets/12644704/47011af6-7719-4e24-97d8-d8bbecb3370e)
 
   
 
@@ -70,8 +70,8 @@ navigate to the application.properties file located at ``` Bookstore-service\src
 - **Endpoint:** `GET /cart/viewCart/userId?userId=2`
   - `viewCart` - pictorial detail of the cart.
  
-    ![image](https://github.com/nelson8013/interswitch_bookStore_service/assets/12644704/be14f826-0fb0-4955-9663-6d9ab4c3ca45)
-    ![image](https://github.com/nelson8013/interswitch_bookStore_service/assets/12644704/58440911-0808-4b9a-b6e4-8900112f8f69)
+  ![image](https://github.com/nelson8013/interswitch_bookStore_service/assets/12644704/be14f826-0fb0-4955-9663-6d9ab4c3ca45)
+  ![image](https://github.com/nelson8013/interswitch_bookStore_service/assets/12644704/58440911-0808-4b9a-b6e4-8900112f8f69)
 
     
 
