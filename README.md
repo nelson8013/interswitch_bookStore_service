@@ -134,6 +134,12 @@ navigate to the application.properties file located at ``` Bookstore-service\src
 
 
 
+**Search book by genre**
+
+- **Endpoint:** `GET /books/genre?genre=THRILLER`
+  - `searchByGenre` - pictorial detail of the  search for a book by genre: THRILLER.
+
+  ![image](https://github.com/nelson8013/interswitch_bookStore_service/assets/12644704/c638af4d-89c4-4090-934c-268a0e8ed102)
 
 
 
