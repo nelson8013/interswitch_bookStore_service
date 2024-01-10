@@ -64,7 +64,7 @@ Add Book To Cart
 
 View Cart
 
-- **Endpoint:** `POST /cart/viewCart/userId?userId=2`
+- **Endpoint:** `GET /cart/viewCart/userId?userId=2`
   - `viewCart` - pictorial detail of the cart.
  
     ![image](https://github.com/nelson8013/interswitch_bookStore_service/assets/12644704/be14f826-0fb0-4955-9663-6d9ab4c3ca45)
@@ -89,6 +89,15 @@ Checkout
      
     ![image](https://github.com/nelson8013/interswitch_bookStore_service/assets/12644704/9dbab297-794e-4d0a-a695-823439f50842)
     ![image](https://github.com/nelson8013/interswitch_bookStore_service/assets/12644704/cc30c5f6-6e99-40d7-91db-95e49fbdb131)
+
+
+Purchase History
+
+- **Endpoint:** `GET /purchase-history/2`
+  - `viewCart` - pictorial detail of the purchase history.
+
+  ![image](https://github.com/nelson8013/interswitch_bookStore_service/assets/12644704/3e6dca3f-e0c1-4970-845c-4c3a3590184c)
+
 
 
 
