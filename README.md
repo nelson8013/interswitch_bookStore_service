@@ -25,10 +25,10 @@ Details for configuring your database.
 Before running the application, if you have a user/username and username different from the suggested credentials above,
 navigate to the application.properties file located at ``` Bookstore-service\src\main\resources ``` and update the fields below.
 
-```bash
+   ```bash
     spring.datasource.username=your_username
     spring.datasource.password=your_password
-```
+   ```
 
 1. Run the following command to start the application:
     ```bash 
