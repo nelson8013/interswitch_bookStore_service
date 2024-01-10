@@ -82,7 +82,7 @@ navigate to the application.properties file located at ``` Bookstore-service\src
 - **Request Body:**
   - `checkoutRequest` - pictorial detail of the checkout request.
     
-    ![image](https://github.com/nelson8013/interswitch_bookStore_service/assets/12644704/60db17a7-47dc-43c8-ad19-5caf763fdd63)
+  ![image](https://github.com/nelson8013/interswitch_bookStore_service/assets/12644704/60db17a7-47dc-43c8-ad19-5caf763fdd63)
 
 
 - **Response:**
