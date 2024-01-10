@@ -99,7 +99,7 @@ navigate to the application.properties file located at ``` Bookstore-service\src
 **Purchase History**
 
 - **Endpoint:** `GET /purchase-history/2`
-  - `viewCart` - pictorial detail of the purchase history.
+  - `purchaseHistory` - pictorial detail of the purchase history.
 
   ![image](https://github.com/nelson8013/interswitch_bookStore_service/assets/12644704/3e6dca3f-e0c1-4970-845c-4c3a3590184c)
 
@@ -109,7 +109,7 @@ navigate to the application.properties file located at ``` Bookstore-service\src
 **Search book by title**
 
 - **Endpoint:** `GET /books/title?title=The%20Great%20Gatsby`
-  - `viewCart` - pictorial detail of the  search for a book by title: Great Gatsby.
+  - `searchByTitle` - pictorial detail of the  search for a book by title: Great Gatsby.
 
   ![image](https://github.com/nelson8013/interswitch_bookStore_service/assets/12644704/d0136498-128c-4c00-8f2f-b389e226b9de)
 
@@ -118,7 +118,7 @@ navigate to the application.properties file located at ``` Bookstore-service\src
 **Search book by author**
 
 - **Endpoint:** `GET /books/author?author=Agatha%20Christie`
-  - `viewCart` - pictorial detail of the  search for a book by author: Agatha Christie.
+  - `searchByAuthor` - pictorial detail of the  search for a book by author: Agatha Christie.
 
   ![image](https://github.com/nelson8013/interswitch_bookStore_service/assets/12644704/e49a9c2f-6970-4d79-86f7-c35013bee4f1)
 
