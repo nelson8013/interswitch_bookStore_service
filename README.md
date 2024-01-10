@@ -99,6 +99,13 @@ Purchase History
   ![image](https://github.com/nelson8013/interswitch_bookStore_service/assets/12644704/3e6dca3f-e0c1-4970-845c-4c3a3590184c)
 
 
+Search book by title
+
+- **Endpoint:** `GET /books/title?title=The%20Great%20Gatsby`
+  - `viewCart` - pictorial detail of the a search for a book by title: Great Gatsby.
+
+![image](https://github.com/nelson8013/interswitch_bookStore_service/assets/12644704/af540f97-efd4-42a5-9976-17de3f07cb3e)
+
 
 
 
