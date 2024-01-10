@@ -125,6 +125,16 @@ navigate to the application.properties file located at ``` Bookstore-service\src
 
 
 
+**Search book by year of publication**
+
+- **Endpoint:** `GET /books/year?year=1992`
+  - `searchByPublicationYear` - pictorial detail of the  search for a book by year of publication: 1992.
+
+  ![image](https://github.com/nelson8013/interswitch_bookStore_service/assets/12644704/6de36ba0-fbb0-4cb3-98de-c446f21dccad)
+
+
+
+
 
 
 
