@@ -57,7 +57,7 @@ Add Book To Cart
 
 - **Response:**
   - Status: 201 Created
-  - Body: Details of the registered drone.
+  - Body: Create cart response.
    - `addToCartResponse` - pictorial detail of the cart response.
      
     ![image](https://github.com/nelson8013/interswitch_bookStore_service/assets/12644704/47011af6-7719-4e24-97d8-d8bbecb3370e)
@@ -69,5 +69,28 @@ View Cart
  
     ![image](https://github.com/nelson8013/interswitch_bookStore_service/assets/12644704/be14f826-0fb0-4955-9663-6d9ab4c3ca45)
     ![image](https://github.com/nelson8013/interswitch_bookStore_service/assets/12644704/58440911-0808-4b9a-b6e4-8900112f8f69)
+
+    
+
+
+Checkout
+
+- **Endpoint:** `POST /checkout`
+- **Request Body:**
+  - `checkoutRequest` - pictorial detail of the checkout request.
+    
+    ![image](https://github.com/nelson8013/interswitch_bookStore_service/assets/12644704/60db17a7-47dc-43c8-ad19-5caf763fdd63)
+
+
+- **Response:**
+  - Status: 201 Created
+  - Body: Checkout response.
+   - `addToCartResponse` - pictorial detail of the checkout response.
+     
+    ![image](https://github.com/nelson8013/interswitch_bookStore_service/assets/12644704/9dbab297-794e-4d0a-a695-823439f50842)
+    ![image](https://github.com/nelson8013/interswitch_bookStore_service/assets/12644704/cc30c5f6-6e99-40d7-91db-95e49fbdb131)
+
+
+
 
 
