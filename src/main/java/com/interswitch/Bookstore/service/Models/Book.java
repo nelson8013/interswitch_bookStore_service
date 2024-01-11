@@ -46,4 +46,16 @@ public class Book {
       this.createdAt = LocalDateTime.now();
    }
 
+
+   public Book(Long id, String title, BookGenre genre, String isbn, String author, String yearOfPublication, Double price) {
+      this.id     = id;
+      this.title  = title;
+      this.genre  = genre;
+      this.isbn   = isbn;
+      this.author = author;
+      this.yearOfPublication = yearOfPublication;
+      this.price  = price;
+      this.createdAt = LocalDateTime.now();
+   }
+
 }

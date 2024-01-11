@@ -49,17 +49,39 @@ public class Cart {
     */
    public Cart() {}
 
+
+
    /**
-    * Instantiates a new Cart with 4 arguments.
+    * Instantiates a new Cart with 6 arguments.
     *
-    * @param user          the user
-    * @param books         the books
-    * @param totalAmount   the total amount
-    * @param paymentStatus the payment status
+    * @param id            the id of the cart
+    * @param user          the user associated witht the cart
+    * @param cartbooks     the cartbooks in the cart
+    * @param totalAmount   the total amount of all books in the cart
+    * @param paymentStatus the payment status of the cart
+    * @param isActive      the current state of a cart
+    */
+   public Cart(Long id, User user, List<CartBook> cartbooks, Double totalAmount,PaymentStatus paymentStatus, Boolean isActive) {
+      this.id            = id;
+      this.user          = user;
+      this.cartbooks     = new ArrayList<>(cartbooks);
+      this.totalAmount   = totalAmount;
+      this.paymentStatus = PaymentStatus.PENDING;
+      this.isActive      = true;
+   }
+
+   /**
+    * Instantiates a new Cart with 5 arguments.
+    *
+    * @param user          the user associated witht the cart
+    * @param cartbooks     the cartbooks in the cart
+    * @param totalAmount   the total amount of all books in the cart
+    * @param paymentStatus the payment status of the cart
+    * @param isActive      the current state of a cart
     */
    public Cart(User user, List<CartBook> cartbooks, Double totalAmount,PaymentStatus paymentStatus, Boolean isActive) {
       this.user          = user;
-      this.cartbooks     = new ArrayList<>(cartbooks); //I am init this collection field here, to avoid null pointer exceptions
+      this.cartbooks     = new ArrayList<>(cartbooks);
       this.totalAmount   = totalAmount;
       this.paymentStatus = PaymentStatus.PENDING;
       this.isActive      = true;

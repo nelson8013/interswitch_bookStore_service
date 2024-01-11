@@ -30,7 +30,7 @@ public class CartController {
    }
 
 
-   @GetMapping("/cart/viewCart/userId") // '/user?user=1'
+   @GetMapping("/cart/viewCart/userId")
    public ResponseEntity<ViewCartResponse> viewCart(@RequestParam("userId") Long userId){
       ViewCartResponse cart = cartService.viewCart(userId);
       return ResponseEntity.ok(new ViewCartResponse( cart.getCartBooks(), cart.getTotalAmount(), cart.isStatus(), cart.getDate()));

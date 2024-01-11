@@ -98,7 +98,7 @@ public class CartService implements CartServiceInterface {
 
       User user = userService.getUser(request.getUserId());
 
-      Map<Long, Long> bookDetail = request.getBooksAndQuantities()//Todo: read about this
+      Map<Long, Long> bookDetail = request.getBooksAndQuantities()
               .stream().collect(Collectors.toMap( book-> book.getBookId(), book-> book.getQuantity(), (a,b) -> a ));
 
 
@@ -108,7 +108,7 @@ public class CartService implements CartServiceInterface {
 
       if (books.isEmpty()) throw new BookNotFoundException("No books found with the given IDs");
 
-      if (books.size() !=  bookDetail.keySet().size()) throw new IllegalArgumentException("Th number of bookIds and quantities do not match");
+      if (books.size() !=  bookDetail.keySet().size()) throw new IllegalArgumentException("The number of bookIds and quantities do not match");
 
       List<CartBook> cartBooks = new ArrayList<>();
 

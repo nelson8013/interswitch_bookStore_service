@@ -6,4 +6,11 @@ import lombok.Data;
 public class BookQtyDto {
    private Long bookId;
    private Long quantity;
+
+   public BookQtyDto(){}
+
+   public BookQtyDto(long bookId, long quantity) {
+      this.bookId = bookId;
+      this.quantity = quantity;
+   }
 }
