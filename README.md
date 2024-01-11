@@ -25,10 +25,10 @@ Details for configuring your database.
 Before running the application, if you have a user/username and username different from the suggested credentials above,
 navigate to the application.properties file located at ``` Bookstore-service\src\main\resources ``` and update the fields below.
 
-```bash
-    spring.datasource.username=your_username
-    spring.datasource.password=your_password
-```
+   ```bash
+      spring.datasource.username=your_username
+      spring.datasource.password=your_password
+   ```
 
 1. Run the following command to start the application:
     ```bash 
@@ -46,28 +46,101 @@ navigate to the application.properties file located at ``` Bookstore-service\src
 - BASE URL: `http://127.0.0.1:5634/api/v1`
 
 ### CART
-Add Book To Cart
+
+**Add Book To Cart**
 
 - **Endpoint:** `POST /cart/add-to-cart`
 - **Request Body:**
   - `addToCartRequest` - pictorial detail of the cart request.
     
-    ![image](https://github.com/nelson8013/interswitch_bookStore_service/assets/12644704/75df85ac-54dc-450f-a772-398147411652)
+  ![image](https://github.com/nelson8013/interswitch_bookStore_service/assets/12644704/75df85ac-54dc-450f-a772-398147411652)
 
 
 - **Response:**
   - Status: 201 Created
-  - Body: Details of the registered drone.
+  - Body: Create cart response.
    - `addToCartResponse` - pictorial detail of the cart response.
      
-    ![image](https://github.com/nelson8013/interswitch_bookStore_service/assets/12644704/47011af6-7719-4e24-97d8-d8bbecb3370e)
+  ![image](https://github.com/nelson8013/interswitch_bookStore_service/assets/12644704/47011af6-7719-4e24-97d8-d8bbecb3370e)
 
-View Cart
+  
 
-- **Endpoint:** `POST /cart/viewCart/userId?userId=2`
+**View Cart**
+
+- **Endpoint:** `GET /cart/viewCart/userId?userId=2`
   - `viewCart` - pictorial detail of the cart.
  
-    ![image](https://github.com/nelson8013/interswitch_bookStore_service/assets/12644704/be14f826-0fb0-4955-9663-6d9ab4c3ca45)
-    ![image](https://github.com/nelson8013/interswitch_bookStore_service/assets/12644704/58440911-0808-4b9a-b6e4-8900112f8f69)
+  ![image](https://github.com/nelson8013/interswitch_bookStore_service/assets/12644704/be14f826-0fb0-4955-9663-6d9ab4c3ca45)
+  ![image](https://github.com/nelson8013/interswitch_bookStore_service/assets/12644704/58440911-0808-4b9a-b6e4-8900112f8f69)
+
+    
+
+
+**Checkout**
+
+- **Endpoint:** `POST /checkout`
+- **Request Body:**
+  - `checkoutRequest` - pictorial detail of the checkout request.
+    
+  ![image](https://github.com/nelson8013/interswitch_bookStore_service/assets/12644704/60db17a7-47dc-43c8-ad19-5caf763fdd63)
+
+
+- **Response:**
+  - Status: 201 Created
+  - Body: Checkout response.
+   - `addToCartResponse` - pictorial detail of the checkout response.
+     
+    ![image](https://github.com/nelson8013/interswitch_bookStore_service/assets/12644704/9dbab297-794e-4d0a-a695-823439f50842)
+    ![image](https://github.com/nelson8013/interswitch_bookStore_service/assets/12644704/cc30c5f6-6e99-40d7-91db-95e49fbdb131)
+
+
+
+
+**Purchase History**
+
+- **Endpoint:** `GET /purchase-history/2`
+  - `purchaseHistory` - pictorial detail of the purchase history.
+
+  ![image](https://github.com/nelson8013/interswitch_bookStore_service/assets/12644704/3e6dca3f-e0c1-4970-845c-4c3a3590184c)
+
+
+
+
+**Search book by title**
+
+- **Endpoint:** `GET /books/title?title=The%20Great%20Gatsby`
+  - `searchByTitle` - pictorial detail of the  search for a book by title: Great Gatsby.
+
+  ![image](https://github.com/nelson8013/interswitch_bookStore_service/assets/12644704/d0136498-128c-4c00-8f2f-b389e226b9de)
+
+
+
+**Search book by author**
+
+- **Endpoint:** `GET /books/author?author=Agatha%20Christie`
+  - `searchByAuthor` - pictorial detail of the  search for a book by author: Agatha Christie.
+
+  ![image](https://github.com/nelson8013/interswitch_bookStore_service/assets/12644704/e49a9c2f-6970-4d79-86f7-c35013bee4f1)
+
+
+
+
+**Search book by year of publication**
+
+- **Endpoint:** `GET /books/year?year=1992`
+  - `searchByPublicationYear` - pictorial detail of the  search for a book by year of publication: 1992.
+
+  ![image](https://github.com/nelson8013/interswitch_bookStore_service/assets/12644704/6de36ba0-fbb0-4cb3-98de-c446f21dccad)
+
+
+
+**Search book by genre**
+
+- **Endpoint:** `GET /books/genre?genre=THRILLER`
+  - `searchByGenre` - pictorial detail of the  search for a book by genre: THRILLER.
+
+  ![image](https://github.com/nelson8013/interswitch_bookStore_service/assets/12644704/c638af4d-89c4-4090-934c-268a0e8ed102)
+
+
 
 
