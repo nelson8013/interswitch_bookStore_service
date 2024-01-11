@@ -9,4 +9,10 @@ import lombok.Setter;
 public class CheckoutRequest {
    private Long userId;
    private PaymentOptions paymentOption;
+
+   public CheckoutRequest(){}
+   public CheckoutRequest(Long userId, PaymentOptions paymentOption) {
+      this.userId = userId;
+      this.paymentOption = paymentOption;
+   }
 }

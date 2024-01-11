@@ -5,6 +5,7 @@ import com.interswitch.Bookstore.service.Enums.PaymentStatus;
 import com.interswitch.Bookstore.service.Exceptions.CartExceptions.CartNotFoundException;
 import com.interswitch.Bookstore.service.Exceptions.PaymentExceptions.IllegalPaymentOptionException;
 import com.interswitch.Bookstore.service.Exceptions.PaymentExceptions.PaymentAlreadyMadeException;
+import com.interswitch.Bookstore.service.Exceptions.UserExceptions.UserNotFoundException;
 import com.interswitch.Bookstore.service.Interfaces.CheckoutServiceInterface;
 import com.interswitch.Bookstore.service.Models.Book;
 import com.interswitch.Bookstore.service.Models.Cart;
@@ -56,9 +57,13 @@ public class CheckoutService implements CheckoutServiceInterface {
       User user = userService.getUser(userId);
 
       Cart cart = cartService.getCartByUser(user);
-      if (cart == null ) {
-         throw new CartNotFoundException("Cart not found for this user");
+      if (user == null ) {
+         throw new UserNotFoundException("User not found for this cart");
       }
+
+       if (cart == null ) {
+          throw new CartNotFoundException("Cart not found for this user");
+       }
 
       if(cart.getPaymentStatus() == PaymentStatus.SUCCESS){
          throw new PaymentAlreadyMadeException("A payment has already been made for this cart");

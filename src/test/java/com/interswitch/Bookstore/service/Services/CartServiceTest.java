@@ -99,7 +99,11 @@ class CartServiceTest {
 
    @AfterEach
    void tearDown() throws Exception {
-      autoCloseable.close();
+      try {
+         autoCloseable.close();
+      } catch (Exception e) {
+         e.printStackTrace();
+      }
    }
 
    @Test

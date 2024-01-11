@@ -11,7 +11,6 @@ import java.util.stream.Collectors;
 
 
 
-//Todo: Don't forget to revisit this purchase history. you want a list of all the purchases made by a user at different times.
 @Service
 public class PurchaseHistoryService implements PurchaseHistoryInterface {
 
